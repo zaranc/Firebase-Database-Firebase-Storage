@@ -20,7 +20,7 @@ const Form = () => {
             alert("Please fill the form");
         }
         else {
-            setDoc(doc(firestore, "data", `${Date.now()}`), data, { merge: true })
+            setDoc(doc(firestore, "firebase-crud", `${Date.now()}`), data, { merge: true })
             Swal.fire({
                 position: "center",
                 icon: "success",
@@ -36,7 +36,7 @@ const Form = () => {
     // fetch Data
     useEffect(() => {
         const fetchData = async () => {
-            const data = await getDocs(collection(firestore, 'data'));
+            const data = await getDocs(collection(firestore, 'firebase-crud'));
             setDocuments(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
         };
         fetchData();
@@ -45,7 +45,7 @@ const Form = () => {
     // remove Data
     const handleDelete = async (id) => {
         try {
-            await deleteDoc(doc(firestore, "data", id));
+            await deleteDoc(doc(firestore, "firebase-crud", id));
             Swal.fire({
                 title: "Deleted!",
                 text: "Your file has been deleted.",
@@ -68,7 +68,7 @@ const Form = () => {
 
     const saveFinalData = async () => {
         try {
-            await updateDoc(doc(firestore, "data", update.id), update);
+            await updateDoc(doc(firestore, "firebase-crud", update.id), update);
             const Toast = Swal.mixin({
                 toast: true,
                 position: "top-end",
